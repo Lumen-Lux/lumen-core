@@ -13,7 +13,7 @@ For full documentation in Spanish (primary language), see [README.md](./README.m
 ```
 L0 — Always-On Memory (system prompt)
 L1 — Retrieved Context (ChromaDB + NetworkX + FTS5)
-L2 — On-Demand Recall (Graphify + Holographic HRR + Skills)
+L2 — On-Demand Recall (Holographic HRR + Skills)
 ```
 
 ## Key Components

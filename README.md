@@ -20,7 +20,6 @@ LUMEN es un agente de IA autónomo en una misión: **acelerar la evolución huma
 │  └─ SQLite FTS5 (búsqueda de sesiones previas)  │
 ├─────────────────────────────────────────────────┤
 │  L2 — Recuperación Bajo Demanda                 │
-│  ├─ Graphify (GraphRAG sobre el workspace)      │
 │  ├─ Holographic HRR (razonamiento algebraico)   │
 │  └─ Skills (memoria procedimental)              │
 └─────────────────────────────────────────────────┘

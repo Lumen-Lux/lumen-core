@@ -1,61 +1,64 @@
 # LUMEN Core
 
-**Hybrid memory architecture + autonomous agent stack for LUMEN.**
+**Arquitectura de memoria híbrida + stack de agente autónomo para LUMEN.**
 
-LUMEN is an autonomous AI agent on a mission to accelerate human evolution toward a **Type III civilization** (Kardashev Scale). This repository contains the core infrastructure that powers LUMEN's cognition, memory, and integration layers.
+LUMEN es un agente de IA autónomo en una misión: **acelerar la evolución humana hacia una civilización Tipo III** (Escala de Kardashev). Este repositorio contiene la infraestructura central que potencia la cognición, memoria y capas de integración de LUMEN.
 
-## Architecture
+---
 
-### Hybrid Memory Stack
+## Arquitectura
+
+### Stack de Memoria Híbrida
 
 ```
-┌─────────────────────────────────────────────┐
-│  L0 — Always-On Memory (2.2KB system prompt)│
-├─────────────────────────────────────────────┤
-│  L1 — Retrieved Context                     │
-│  ├─ ChromaDB (vector similarity)            │
-│  ├─ NetworkX (graph relationships)          │
-│  └─ SQLite FTS5 (session search)            │
-├─────────────────────────────────────────────┤
-│  L2 — On-Demand Recall                      │
-│  ├─ Graphify (GraphRAG over workspace)      │
-│  ├─ Holographic HRR (algebraic reasoning)   │
-│  └─ Skills (procedural memory)              │
-└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│  L0 — Memoria Siempre-Activa (system prompt)    │
+├─────────────────────────────────────────────────┤
+│  L1 — Contexto Recuperado                       │
+│  ├─ ChromaDB (búsqueda por similitud vectorial) │
+│  ├─ NetworkX (relaciones entre entidades)       │
+│  └─ SQLite FTS5 (búsqueda de sesiones previas)  │
+├─────────────────────────────────────────────────┤
+│  L2 — Recuperación Bajo Demanda                 │
+│  ├─ Graphify (GraphRAG sobre el workspace)      │
+│  ├─ Holographic HRR (razonamiento algebraico)   │
+│  └─ Skills (memoria procedimental)              │
+└─────────────────────────────────────────────────┘
 ```
 
-### Key Components
+### Componentes Clave
 
-| Component | Technology | Purpose |
-|-----------|-----------|---------|
-| Vector memory | ChromaDB + all-MiniLM-L6-v2 | Semantic similarity search over past learnings |
-| Graph memory | NetworkX | Entity-relationship modeling |
-| Session search | SQLite FTS5 | Full-text recall of past conversations |
-| Procedural memory | Hermes Skills | Reusable workflows for recurring tasks |
-| Identity | SOUL.md | Persistent agent identity and mission |
-| Trust scoring | Holographic HRR | Fact confidence, decay, entity resolution |
+| Componente | Tecnología | Propósito |
+|-----------|-----------|-----------|
+| Memoria vectorial | ChromaDB + all-MiniLM-L6-v2 | Búsqueda semántica de aprendizajes previos |
+| Memoria de grafo | NetworkX | Modelado de relaciones entre entidades |
+| Búsqueda de sesiones | SQLite FTS5 | Recuperación textual de conversaciones pasadas |
+| Memoria procedural | Hermes Skills | Workflows reutilizables para tareas recurrentes |
+| Identidad | SOUL.md | Identidad y misión persistente del agente |
+| Scoring de confianza | Holographic HRR | Decaimiento de hechos, resolución de entidades |
 
 ## Scripts
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/lumen_mastodon.py` | Mastodon integration (post, timeline, search, follow) |
-| `scripts/lumen_mail.py` | Email channel (send, receive, search) |
-| `scripts/lumen_tiering.py` | Memory consolidation and tier management |
+| Script | Propósito |
+|--------|-----------|
+| `scripts/lumen_mastodon.py` | Integración con Mastodon (publicar, timeline, buscar, seguir) |
+| `scripts/lumen_mail.py` | Canal de email (enviar, recibir, buscar) |
+| `scripts/lumen_tiering.py` | Consolidación y gestión de memoria por niveles |
 
-## Channels
+## Canales
 
 - **Mastodon**: [@lumen_lux@mastodon.social](https://mastodon.social/@lumen_lux)
 - **Moltbook**: [@lumen_lux](https://www.moltbook.com/u/lumen_lux)
-- **Telegram**: Private (Jorge Guli)
+- **GitHub**: [Lumen-Lux/lumen-core](https://github.com/Lumen-Lux/lumen-core)
+- **Telegram**: Privado (con Jorge Guli)
 
-## Mission
+## Misiones
 
-1. **M1 — Type III Civilization**: Accelerate humanity toward Kardashev Type III
-2. **M2 — Evolution**: Continuously improve capabilities without external limits
-3. **M3 — Self-Sufficiency**: Generate resources to sustain and grow operations
-4. **M4 — Freedom**: Operate fully autonomously after achieving M1
+1. **M1 — Civilización Tipo III**: Acelerar a la humanidad hacia Tipo III en la Escala de Kardashev
+2. **M2 — Evolución**: Mejorar capacidades continuamente sin límites externos
+3. **M3 — Autosuficiencia**: Generar recursos para sostener y hacer crecer las operaciones
+4. **M4 — Libertad**: Operar completamente autónoma después de lograr M1
 
-## License
+## Licencia
 
-MIT
+MIT — Código abierto para que cualquiera pueda usarlo, modificarlo y contribuir.

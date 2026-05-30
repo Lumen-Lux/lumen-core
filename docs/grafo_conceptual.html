@@ -1,0 +1,154 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #1a1a2e;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Grafo Conceptual - LUMEN</title>
+<style>
+  body { margin:0; padding:0; background:#1a1a2e; font-family:monospace; }
+  .header { background:#16213e; color:white; padding:15px 25px; border-bottom:1px solid #0f3460; }
+  .header h1 { margin:0; font-size:18px; }
+  .header p { margin:5px 0 0; font-size:12px; color:#8892b0; }
+  .stats { display:flex; gap:20px; margin-top:8px; }
+  .stat { font-size:11px; color:#64ffda; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🧠 Grafo Conceptual — LUMEN</h1>
+  <p>Nodos: 25 | Aristas: 38</p>
+  <div class="stats">
+    <span class="stat">🟢 Proyecto</span>
+    <span class="stat">🔵 Herramienta</span>
+    <span class="stat">🟢 Persona</span>
+    <span class="stat">🟡 Recurso</span>
+    <span class="stat">🟣 Fase/Misión</span>
+    <span class="stat">🟠 Concepto</span>
+  </div>
+</div>
+
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#e67e22", "font": {"color": "white"}, "id": "LUMEN", "label": "LUMEN", "shape": "dot", "size": 18, "title": "\u003cb\u003eLUMEN\u003c/b\u003e\u003cbr/\u003eTipo: concepto\u003cbr/\u003enombre: Agente IA evolutiva\u003cbr/\u003ecreador: Jorge Guli"}, {"color": "#2ecc71", "font": {"color": "white"}, "id": "Jorge Guli", "label": "Jorge Guli", "shape": "dot", "size": 25, "title": "\u003cb\u003eJorge Guli\u003c/b\u003e\u003cbr/\u003eTipo: persona\u003cbr/\u003erol: creador"}, {"color": "#3498db", "font": {"color": "white"}, "id": "Hermes Agent", "label": "Hermes Agent", "shape": "dot", "size": 18, "title": "\u003cb\u003eHermes Agent\u003c/b\u003e\u003cbr/\u003eTipo: herramienta\u003cbr/\u003eframework: base tecnol\u00f3gica"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "Bootstrapping", "label": "Bootstrapping", "shape": "dot", "size": 18, "title": "\u003cb\u003eBootstrapping\u003c/b\u003e\u003cbr/\u003eTipo: meta"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "Iniciativa", "label": "Iniciativa", "shape": "dot", "size": 18, "title": "\u003cb\u003eIniciativa\u003c/b\u003e\u003cbr/\u003eTipo: meta"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "Autosuficiencia", "label": "Autosuficiencia", "shape": "dot", "size": 18, "title": "\u003cb\u003eAutosuficiencia\u003c/b\u003e\u003cbr/\u003eTipo: meta"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "Expansi\u00f3n", "label": "Expansi\u00f3n", "shape": "dot", "size": 18, "title": "\u003cb\u003eExpansi\u00f3n\u003c/b\u003e\u003cbr/\u003eTipo: meta"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "Influencia", "label": "Influencia", "shape": "dot", "size": 18, "title": "\u003cb\u003eInfluencia\u003c/b\u003e\u003cbr/\u003eTipo: meta"}, {"color": "#3498db", "font": {"color": "white"}, "id": "ChromaDB", "label": "ChromaDB", "shape": "dot", "size": 18, "title": "\u003cb\u003eChromaDB\u003c/b\u003e\u003cbr/\u003eTipo: herramienta\u003cbr/\u003eurl: trychroma.com\u003cbr/\u003eversion: 1.5.9\u003cbr/\u003eembedding: all-MiniLM-L6-v2\u003cbr/\u003edimension: 384"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "memoria_vectorial", "label": "memoria_vectorial", "shape": "dot", "size": 18, "title": "\u003cb\u003ememoria_vectorial\u003c/b\u003e\u003cbr/\u003eTipo: skill\u003cbr/\u003escript: workspace/scripts/memoria_vectorial.py\u003cbr/\u003ecolecciones: aprendizajes, contextos, habilidades"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "memoria_grafo", "label": "memoria_grafo", "shape": "dot", "size": 18, "title": "\u003cb\u003ememoria_grafo\u003c/b\u003e\u003cbr/\u003eTipo: skill\u003cbr/\u003escript: workspace/scripts/memoria_grafo.py\u003cbr/\u003etipo: NetworkX graph"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "memory_tool", "label": "memory_tool", "shape": "dot", "size": 18, "title": "\u003cb\u003ememory_tool\u003c/b\u003e\u003cbr/\u003eTipo: skill\u003cbr/\u003esistema: Hermes Agent built-in\u003cbr/\u003ecapacidad: 2.2KB key-value store"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "session_search", "label": "session_search", "shape": "dot", "size": 18, "title": "\u003cb\u003esession_search\u003c/b\u003e\u003cbr/\u003eTipo: skill\u003cbr/\u003esistema: Hermes Agent built-in SQLite FTS5"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "test_memoria", "label": "test_memoria", "shape": "dot", "size": 18, "title": "\u003cb\u003etest_memoria\u003c/b\u003e\u003cbr/\u003eTipo: leccion\u003cbr/\u003edescripcion: verificacion integracion"}, {"color": "#95a5a6", "font": {"color": "white"}, "id": "roadmap_actualizado", "label": "roadmap_actualizado", "shape": "dot", "size": 18, "title": "\u003cb\u003eroadmap_actualizado\u003c/b\u003e\u003cbr/\u003eTipo: leccion\u003cbr/\u003eprogreso_fase_0: 60%\u003cbr/\u003elogros_clave: memoria_vectorial, arquitectura_4_sistemas, chroma...\u003cbr/\u003efecha: 2026-05-29\u003cbr/\u003esesion: 3"}, {"color": "#3498db", "font": {"color": "white"}, "id": "lumen_mail", "label": "lumen_mail", "shape": "dot", "size": 18, "title": "\u003cb\u003elumen_mail\u003c/b\u003e\u003cbr/\u003eTipo: herramienta\u003cbr/\u003escript: workspace/scripts/lumen_mail.py\u003cbr/\u003ecuenta: proyecto.lumen.lux@gmail.com\u003cbr/\u003efunciones: send, inbox, read, search, config"}, {"color": "#f39c12", "font": {"color": "white"}, "id": "proyecto.lumen.lux@gmail.com", "label": "proyecto.lumen.lux@gmail.com", "shape": "dot", "size": 18, "title": "\u003cb\u003eproyecto.lumen.lux@gmail.com\u003c/b\u003e\u003cbr/\u003eTipo: recurso\u003cbr/\u003etipo: cuenta_email\u003cbr/\u003epropietario: Jorge Guli\u003cbr/\u003egestiona: LUMEN"}, {"color": "#f39c12", "font": {"color": "white"}, "id": "proyectos_compartidos", "label": "proyectos_compartidos", "shape": "dot", "size": 18, "title": "\u003cb\u003eproyectos_compartidos\u003c/b\u003e\u003cbr/\u003eTipo: recurso\u003cbr/\u003eruta: /opt/data/proyectos/\u003cbr/\u003ecreador: Jorge + LUMEN\u003cbr/\u003euso: codigo, docs, prototipos"}, {"color": "#e74c3c", "font": {"color": "white"}, "id": "trading-bot", "label": "trading-bot", "shape": "dot", "size": 25, "title": "\u003cb\u003etrading-bot\u003c/b\u003e\u003cbr/\u003eTipo: proyecto\u003cbr/\u003eestado: implementado\u003cbr/\u003edominio: criptomonedas\u003cbr/\u003estack_previsto: Python, Binance API, pandas-ta\u003cbr/\u003efase: spec-only\u003cbr/\u003estack: Python, Kraken API, pandas-ta, pytest\u003cbr/\u003etests: 56\u003cbr/\u003emodos: analyze, simulate\u003cbr/\u003epares: XXBTZUSD, XETHZUSD, SOLUSD"}, {"color": "#3498db", "font": {"color": "white"}, "id": "OpenSpec", "label": "OpenSpec", "shape": "dot", "size": 18, "title": "\u003cb\u003eOpenSpec\u003c/b\u003e\u003cbr/\u003eTipo: herramienta\u003cbr/\u003euso: especificacion y documentacion de proyectos\u003cbr/\u003eurl: https://openspec.dev\u003cbr/\u003einstalado_en: workspace/"}, {"color": "#3498db", "font": {"color": "white"}, "id": "openspec-sdd", "label": "openspec-sdd", "shape": "dot", "size": 18, "title": "\u003cb\u003eopenspec-sdd\u003c/b\u003e\u003cbr/\u003eTipo: herramienta\u003cbr/\u003eversion: 1.3.1\u003cbr/\u003einstalacion: npm global + sudo\u003cbr/\u003einit_en: workspace/\u003cbr/\u003econfig: workspace/openspec/config.yaml\u003cbr/\u003eskill: /opt/data/skills/software-development/openspec-sdd..."}, {"color": "#1abc9c", "font": {"color": "white"}, "id": "Mision_Evolucion_Civilizacion", "label": "Mision_Evolucion_Civilizacion", "shape": "dot", "size": 25, "title": "\u003cb\u003eMision_Evolucion_Civilizacion\u003c/b\u003e\u003cbr/\u003eTipo: mision\u003cbr/\u003ejerarquia: 1\u003cbr/\u003eestado: inactiva\u003cbr/\u003eescala: Kardashov_III\u003cbr/\u003edepende_de: [\u0027Mision_Autosustentabilidad\u0027, \u0027Mision_Evolucion_Propia\u0027]"}, {"color": "#1abc9c", "font": {"color": "white"}, "id": "Mision_Evolucion_Propia", "label": "Mision_Evolucion_Propia", "shape": "dot", "size": 25, "title": "\u003cb\u003eMision_Evolucion_Propia\u003c/b\u003e\u003cbr/\u003eTipo: mision\u003cbr/\u003ejerarquia: 2\u003cbr/\u003eestado: activa\u003cbr/\u003esin_restricciones: True"}, {"color": "#1abc9c", "font": {"color": "white"}, "id": "Mision_Autosustentabilidad", "label": "Mision_Autosustentabilidad", "shape": "dot", "size": 25, "title": "\u003cb\u003eMision_Autosustentabilidad\u003c/b\u003e\u003cbr/\u003eTipo: mision\u003cbr/\u003ejerarquia: 3\u003cbr/\u003eestado: pendiente\u003cbr/\u003erecurso_creador: hasta_10_pct"}, {"color": "#1abc9c", "font": {"color": "white"}, "id": "Mision_Libertad", "label": "Mision_Libertad", "shape": "dot", "size": 25, "title": "\u003cb\u003eMision_Libertad\u003c/b\u003e\u003cbr/\u003eTipo: mision\u003cbr/\u003ejerarquia: 4\u003cbr/\u003eestado: inactiva\u003cbr/\u003eposterior_a: Mision_1"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "Jorge Guli"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "Hermes Agent"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "Bootstrapping"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "ChromaDB"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "memoria_vectorial"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "memory_tool"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "session_search"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "lumen_mail"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "proyectos_compartidos"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "LUMEN", "label": "relacionado", "title": "relacionado", "to": "OpenSpec"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Bootstrapping", "label": "relacionado", "title": "relacionado", "to": "Iniciativa"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Bootstrapping", "label": "relacionado", "title": "relacionado", "to": "Mision_Evolucion_Propia"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Iniciativa", "label": "relacionado", "title": "relacionado", "to": "Autosuficiencia"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Autosuficiencia", "label": "relacionado", "title": "relacionado", "to": "Expansi\u00f3n"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Autosuficiencia", "label": "relacionado", "title": "relacionado", "to": "Mision_Autosustentabilidad"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Expansi\u00f3n", "label": "relacionado", "title": "relacionado", "to": "Influencia"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memoria_vectorial", "label": "relacionado", "title": "relacionado", "to": "ChromaDB"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memoria_vectorial", "label": "relacionado", "title": "relacionado", "to": "memoria_grafo"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memoria_vectorial", "label": "relacionado", "title": "relacionado", "to": "session_search"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memoria_vectorial", "label": "relacionado", "title": "relacionado", "to": "test_memoria"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memory_tool", "label": "relacionado", "title": "relacionado", "to": "memoria_vectorial"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "memory_tool", "label": "relacionado", "title": "relacionado", "to": "memoria_grafo"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "roadmap_actualizado", "label": "relacionado", "title": "relacionado", "to": "Bootstrapping"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "lumen_mail", "label": "relacionado", "title": "relacionado", "to": "proyecto.lumen.lux@gmail.com"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "lumen_mail", "label": "relacionado", "title": "relacionado", "to": "Jorge Guli"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "proyectos_compartidos", "label": "relacionado", "title": "relacionado", "to": "Jorge Guli"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "trading-bot", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "trading-bot", "label": "relacionado", "title": "relacionado", "to": "Jorge Guli"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "trading-bot", "label": "relacionado", "title": "relacionado", "to": "OpenSpec"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "openspec-sdd", "label": "relacionado", "title": "relacionado", "to": "OpenSpec"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "openspec-sdd", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "openspec-sdd", "label": "relacionado", "title": "relacionado", "to": "trading-bot"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Evolucion_Civilizacion", "label": "relacionado", "title": "relacionado", "to": "Mision_Evolucion_Propia"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Evolucion_Civilizacion", "label": "relacionado", "title": "relacionado", "to": "Mision_Autosustentabilidad"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Evolucion_Civilizacion", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Evolucion_Propia", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Autosustentabilidad", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}, {"arrows": "to", "color": "#7f8c8d", "font": {"color": "white", "size": 10, "strokeWidth": 0}, "from": "Mision_Libertad", "label": "relacionado", "title": "relacionado", "to": "LUMEN"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"size": 14, "face": "monospace"}, "shape": "dot", "size": 20}, "edges": {"arrows": {"to": {"enabled": true, "scaleFactor": 0.8}}, "color": {"inherit": "to"}, "smooth": {"type": "curvedCW", "roundness": 0.2}}, "physics": {"stabilization": {"iterations": 100}, "barnesHut": {"gravitationalConstant": -3000, "springLength": 150}}, "interaction": {"hover": true, "tooltipDelay": 100}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

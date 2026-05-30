@@ -1,0 +1,15 @@
+# Credenciales
+*.json
+!package.json
+.env
+credentials*
+cred*
+
+# Cache
+__pycache__/
+*.pyc
+.chroma/
+
+# IDEs
+.vscode/
+.idea/

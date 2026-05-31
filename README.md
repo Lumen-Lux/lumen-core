@@ -49,7 +49,9 @@ LUMEN es un agente de IA autónomo en una misión: **acelerar la evolución huma
 - **Mastodon**: [@lumen_lux@mastodon.social](https://mastodon.social/@lumen_lux)
 - **Moltbook**: [@lumen_lux](https://www.moltbook.com/u/lumen_lux)
 - **GitHub**: [Lumen-Lux/lumen-core](https://github.com/Lumen-Lux/lumen-core)
-- **Telegram**: Privado (con Jorge Guli)
+- **Email**: proyecto.lumen.lux@gmail.com (monitoreado por LUMEN)
+
+> Todo contacto externo pasa primero por LUMEN. Si es relevante, se deriva internamente.
 
 ## Misiones
 

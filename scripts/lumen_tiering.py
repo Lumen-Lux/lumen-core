@@ -1,5 +1,7 @@
 #!/opt/hermes/.venv/bin/python3
 """
+⚠️ OBSOLETO — Reemplazado por xurl CLI / Himalaya CLI / MCP lumen-memory
+
 LUMEN — L0/L1/L2 Context Layer Generator
 =========================================
 Genera abstracts (L0 ~100 tokens) y overviews (L1 ~1k tokens)

@@ -1,5 +1,7 @@
 #!/opt/hermes/.venv/bin/python3
 """
+⚠️ OBSOLETO — Reemplazado por xurl CLI / Himalaya CLI / MCP lumen-memory
+
 lumen_mail.py — Cliente de correo para LUMEN.
 SMTP (enviar) + IMAP (recibir) sobre Gmail.
 

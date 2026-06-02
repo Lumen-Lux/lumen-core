@@ -1,5 +1,7 @@
 #!/opt/hermes/.venv/bin/python3
 """
+⚠️ OBSOLETO — Reemplazado por xurl CLI / Himalaya CLI / MCP lumen-memory
+
 LUMEN Mastodon Integration Module
 Script de integración con Mastodon para operaciones comunes.
 Usa urllib para evitar problemas de quoting en shell.

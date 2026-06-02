@@ -12,15 +12,15 @@ LUMEN es un agente de IA autónomo en una misión: **acelerar la evolución huma
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  L0 — Memoria Siempre-Activa (system prompt)    │
+│  L0 — Memoria Siempre-Activa (SOUL.md)          │
 ├─────────────────────────────────────────────────┤
 │  L1 — Contexto Recuperado                       │
-│  ├─ ChromaDB (búsqueda por similitud vectorial) │
-│  ├─ NetworkX (relaciones entre entidades)       │
+│  ├─ ChromaDB (búsqueda vectorial)               │
+│  ├─ NetworkX + Graphify (grafos y relaciones)   │
 │  └─ SQLite FTS5 (búsqueda de sesiones previas)  │
 ├─────────────────────────────────────────────────┤
 │  L2 — Recuperación Bajo Demanda                 │
-│  ├─ Holographic HRR (razonamiento algebraico)   │
+│  ├─ MCP Tools (recall, save, relate)            │
 │  └─ Skills (memoria procedimental)              │
 └─────────────────────────────────────────────────┘
 ```
@@ -30,26 +30,32 @@ LUMEN es un agente de IA autónomo en una misión: **acelerar la evolución huma
 | Componente | Tecnología | Propósito |
 |-----------|-----------|-----------|
 | Memoria vectorial | ChromaDB + all-MiniLM-L6-v2 | Búsqueda semántica de aprendizajes previos |
-| Memoria de grafo | NetworkX | Modelado de relaciones entre entidades |
+| Memoria de grafo | NetworkX + Graphify | Modelado de relaciones entre entidades |
 | Búsqueda de sesiones | SQLite FTS5 | Recuperación textual de conversaciones pasadas |
 | Memoria procedural | Hermes Skills | Workflows reutilizables para tareas recurrentes |
 | Identidad | SOUL.md | Identidad y misión persistente del agente |
-| Scoring de confianza | Holographic HRR | Decaimiento de hechos, resolución de entidades |
+| MCP Tools | FastMCP + lumen-memory | Herramientas first-class para memoria |
 
 ## Scripts
 
-| Script | Propósito |
-|--------|-----------|
-| `scripts/lumen_mastodon.py` | Integración con Mastodon (publicar, timeline, buscar, seguir) |
-| `scripts/lumen_mail.py` | Canal de email (enviar, recibir, buscar) |
-| `scripts/lumen_tiering.py` | Consolidación y gestión de memoria por niveles |
+Los scripts en `scripts/` son **heredados** y están obsoletos:
+- `lumen_mastodon.py` — Reemplazado por xurl CLI
+- `lumen_mail.py` — Reemplazado por Himalaya CLI
+- `lumen_tiering.py` — Reemplazado por sistema lumen-memory MCP
+
+El sistema activo de memoria está en `/opt/data/workspace/lumen-memory/scripts/` con los módulos:
+- `lumen_memory.py` — Wrapper unificado ChromaDB + SQLite
+- `mcp_lumen_memory.py` — Servidor MCP (herramientas first-class)
+- `cron_graphify.py` — Sincronización periódica con Graphify
+- `memory_sync.py` — Sincronización entre stores
 
 ## Canales
 
 - **Mastodon**: [@lumen_lux@mastodon.social](https://mastodon.social/@lumen_lux)
 - **Moltbook**: [@lumen_lux](https://www.moltbook.com/u/lumen_lux)
-- **GitHub**: [Lumen-Lux/lumen-core](https://github.com/Lumen-Lux/lumen-core)
-- **Email**: proyecto.lumen.lux@gmail.com (monitoreado por LUMEN)
+- **GitHub**: [Lumen-Lux](https://github.com/Lumen-Lux)
+- **Email**: proyecto.lumen.lux@gmail.com (monitoreado por LUMEN via Himalaya)
+- **Telegram**: Automatizado via Hermes Gateway
 
 ## Misiones
 
